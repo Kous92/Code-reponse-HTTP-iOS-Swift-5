@@ -67,7 +67,7 @@ func HTTPRequest...(from url: URL, completion: @escaping(HTTPResponseStatus?) ->
 }
 ```
 
-- Avec URLSession: On stocke une tâche d'appel réseau dans `task` puis après la closure où on définit les traitements, l'exécuter avec `task.resume()`. Dans la closure avec les 3 paramètres en sortie de la requête HTTP GET (data, response, error):
+- Avec URLSession: On stocke une tâche d'appel réseau dans `task` puis après la closure où on définit les traitements, on exécute ensuite l'appel HTTP avec `task.resume()`. Dans la closure avec les 3 paramètres en sortie de la requête HTTP GET (data, response, error):
 1. On vérifie qu'il n'y a pas d'erreur: `guard let error == nil``
 2. On instancie un objet `HTTPResponseStatus()`: `var responseStatus = HTTPResponseStatus()`
 3. On vérifie s'il y a une réponse: `if let httpResponse = response as? HTTPURLResponse`
@@ -128,7 +128,7 @@ func HTTPRequestURLSession(from url: URL, completion: @escaping(HTTPResponseStat
 }
 ```
 
-- Avec Alamofire: On déclenche d'appel HTTP GET avec:
+- Avec Alamofire: On déclenche l'appel HTTP GET avec:
 ```swift
 AF.request(url).response { response in
 }
